@@ -1,0 +1,1 @@
+export const rps = ['rock', 'paper', 'scissors']
