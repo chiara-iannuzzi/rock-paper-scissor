@@ -57,13 +57,13 @@
       margin: rem(200) auto 0 auto;
     }
     &-icon{
-      &-rock{
+      &-paper{
         @include rpsLinkStyle(calc(($rpsIconWidth / 4) * -1px), calc(($rpsIconWidth / 4) * -1px), unset, unset);
       }
-      &-paper{
+      &-scissors{
         @include rpsLinkStyle(calc(($rpsIconWidth / 4) * -1px), unset, calc(($rpsIconWidth / 4) * -1px), unset);
       }
-      &-scissors{
+      &-rock{
         @include rpsLinkStyle(unset, calc(50% - ($rpsIconWidth / 2) * 1px), unset, 0);
       }
     }
