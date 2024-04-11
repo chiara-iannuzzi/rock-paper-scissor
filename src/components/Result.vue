@@ -17,11 +17,19 @@
     const finalScoreWhoWin = ref();
 
     switch (true) {
-    case pickedId == randomId + 1 || pickedId == 0 && randomId == 2:
+    case pickedId == randomId + 1 || pickedId == 0 && randomId == 4:
         finalScoreState.value = 'you loose'
         finalScoreWhoWin.value = 0
         break;
-    case pickedId + 1 == randomId || pickedId == 2 && randomId == 0:
+    case pickedId + 1 == randomId || pickedId == 4 && randomId == 0:
+        finalScoreState.value = 'you win'
+        finalScoreWhoWin.value = 1
+        break;
+        case pickedId == 3 && randomId == 0 || pickedId == 4 && randomId == 1 || pickedId == 0 && randomId == 2 || pickedId == 1 && randomId == 3 || pickedId == 2 && randomId == 4 :
+        finalScoreState.value = 'you loose'
+        finalScoreWhoWin.value = 0
+        break;
+    case pickedId == 0 && randomId == 3 || pickedId == 1 && randomId == 4 || pickedId == 2 && randomId == 0 || pickedId == 3 && randomId == 1 || pickedId == 4 && randomId == 2 :
         finalScoreState.value = 'you win'
         finalScoreWhoWin.value = 1
         break;
@@ -29,7 +37,6 @@
         finalScoreState.value = 'it\'s a tie'
         finalScoreWhoWin.value = null
 
-    console.log(finalScoreState)
 
 }
     
@@ -63,7 +70,7 @@
 </template>
 
 <style scoped lang="scss">
-  @mixin rpsLinkStyle($top, $left, $right, $bottom){
+  @mixin rpsLinkStyle(){
     position: relative;
     width: rem(200);
     height: rem(200);
@@ -101,13 +108,19 @@
     }
     &-icon{
       &-rock{
-        @include rpsLinkStyle(calc((200 / 4) * -1px), calc((200 / 4) * -1px), unset, unset);
+        @include rpsLinkStyle;
       }
       &-paper{
-        @include rpsLinkStyle(calc((200 / 4) * -1px), unset, calc((200 / 4) * -1px), unset);
+        @include rpsLinkStyle;
       }
       &-scissors{
-        @include rpsLinkStyle(unset, calc(50% - (200 / 2) * 1px), unset, 0);
+        @include rpsLinkStyle;
+      }
+      &-lizard{
+        @include rpsLinkStyle;
+      }
+      &-spock{
+        @include rpsLinkStyle;
       }
     }
   }

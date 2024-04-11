@@ -9,7 +9,7 @@
     <RouterLink :to="'/pick/' + index" v-for="(item, index) in rps" :key="item" :class="'pick-icon-' + item + ' color-' + item">
       <Icon :class="'pick-icon-' + item + '-svg'" :name="'icon-' + item"/>
     </RouterLink>
-    <Icon class="pick-container-background" name="bg-triangle"/>
+    <Icon class="pick-container-background" name="bg-pentagon"/>
   </section>
   
 
@@ -58,13 +58,19 @@
     }
     &-icon{
       &-paper{
-        @include rpsLinkStyle(calc(($rpsIconWidth / 4) * -1px), calc(($rpsIconWidth / 4) * -1px), unset, unset);
+        @include rpsLinkStyle(80px, unset, calc(($rpsIconWidth / 4) * -1px), unset);
+      }
+      &-lizard{
+        @include rpsLinkStyle(unset, 0, unset, 0);
+      }
+      &-spock{
+        @include rpsLinkStyle(80px, calc(($rpsIconWidth / 4) * -1px), unset, unset);
       }
       &-scissors{
-        @include rpsLinkStyle(calc(($rpsIconWidth / 4) * -1px), unset, calc(($rpsIconWidth / 4) * -1px), unset);
+        @include rpsLinkStyle(0, calc(50% - ($rpsIconWidth / 2) * 1px), unset, unset);
       }
       &-rock{
-        @include rpsLinkStyle(unset, calc(50% - ($rpsIconWidth / 2) * 1px), unset, 0);
+        @include rpsLinkStyle(unset, unset, 0, 0);
       }
     }
   }

@@ -24,7 +24,7 @@ const count = ref(0)
 
   <Button link="" @click="toggleRuleModal" theme="secondary">Rules</Button>
   <Modal :isOpen="isRuleOpen" @close="isRuleOpen = false">
-    <img src="@/assets/image-rules.svg">
+    <img src="@/assets/image-rules-bonus.svg">
   </Modal>
 
 </template>
