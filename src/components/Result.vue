@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import Icon from './Icon.vue';
     import Button from './Button.vue';
+    import CircleAnimation from './CircleAnimation.vue';
     import { ref } from 'vue'
 
     import { rps } from '../constants';
@@ -13,16 +14,20 @@
     const randomPicked = rps[randomId];
 
     const finalScoreState = ref('');
+    const finalScoreWhoWin = ref();
 
     switch (true) {
     case pickedId == randomId + 1 || pickedId == 0 && randomId == 2:
         finalScoreState.value = 'you loose'
+        finalScoreWhoWin.value = 0
         break;
     case pickedId + 1 == randomId || pickedId == 2 && randomId == 0:
         finalScoreState.value = 'you win'
+        finalScoreWhoWin.value = 1
         break;
     default:
         finalScoreState.value = 'it\'s a tie'
+        finalScoreWhoWin.value = null
 
     console.log(finalScoreState)
 
@@ -32,22 +37,25 @@
 
 <template>
     <section class="result-container">
-        <div>
-            <p>You picked <span>{{ pickedItem }}</span></p>
+        <div class="result-choice">
+            <p class="result-choice-title">You picked</p>
             <div :class="'pick-icon-' + pickedItem + ' color-' + pickedItem">
                 <Icon :class="'pick-icon-' + pickedItem + '-svg'" :name="'icon-' + pickedItem"/>
             </div>
+            <CircleAnimation class="" :class="{'is-showing' : finalScoreWhoWin == 1}"></CircleAnimation>
         </div>
-        <div>
-            <p>{{finalScoreState}}</p>
+        <div class="result-middle">
+            <p class="result-middle-title">{{finalScoreState}}</p>
             <Button theme="primary" link="/">Play again</Button>
         </div>
         
-        <div>
-            <p>The house picked <span>{{ randomPicked }}</span></p>
-            <div :class="'pick-icon-' + randomPicked + ' color-' + randomPicked">
+        <div class="result-choice">
+            <p class="result-choice-title">The house picked</p>
+            <div class="house-choice-placeholder"></div>
+            <div :class="'house-choice pick-icon-' + randomPicked + ' color-' + randomPicked">
                 <Icon :class="'pick-icon-' + randomPicked + '-svg'" :name="'icon-' + randomPicked"/>
             </div>
+            <CircleAnimation class="" :class="{'is-showing' : finalScoreWhoWin == 0}"></CircleAnimation>
         </div>
     </section>
     
@@ -104,11 +112,68 @@
     }
   }
 
-  .result-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin : 100px auto 0 auto;
-    max-width: 500px;
+  .circle-container{
+      position:absolute;
+      bottom: 0;
+      opacity: 0;
+      width:200px;
+      height:200px;
+      z-index: -1;
+      &.is-showing{
+          animation: fadeIn .1s 1.5s both;
+      }
   }
+
+  .result{
+    &-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin : 100px auto 0 auto;
+      max-width: 500px;
+      animation: containerSpacing .4s 2s ease both;
+    }
+    &-middle{
+      animation: fadeIn .6s 2.3s ease both;
+      text-align: center;
+      &-title{
+        font-size: 30px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: rem(15);
+      }
+    }
+    &-choice{
+      position:relative;
+      &-title{
+        margin-bottom: 20px;
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+  }
+
+  .house-choice{
+    animation: fadeIn .3s 1s both;
+    &-placeholder{
+      width: 200px;
+      height: 200px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 100px;
+      position: absolute;
+    }
+  }
+
+  @keyframes containerSpacing {
+    from{ max-width: 500px; }
+    to{ max-width: 700px; }
+  }
+
+  @keyframes fadeIn {
+    from{ opacity: 0 }
+    to{ opacity: 1 }
+  }
+
 </style>
