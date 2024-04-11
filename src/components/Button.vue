@@ -1,16 +1,17 @@
 <script setup lang="ts">
 defineProps<{
-  link: string
+  link: string,
+  theme: 'primary' | 'secondary'
 }>()
 </script>
 
 <template>
-    <RouterLink class="button" v-if="link !== ''" :to="link">
+    <RouterLink :class="'button ' + theme" v-if="link !== ''" :to="link">
       <slot></slot>
     </RouterLink>
-    <div class="button" v-else>
+    <button :class="'button ' + theme" v-else>
         <slot></slot>
-    </div>
+    </button>
 </template>
 
 <style lang="scss">
@@ -18,7 +19,28 @@ defineProps<{
         border: 1px white solid;
         border-radius: 5px;
         color: white;
-        padding: 5px 10px;
+        padding: 10px 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold;
         text-decoration: none;
+        transition: .3s ease;
+        cursor: pointer;
+        &.primary{
+            background: white;
+            color: $blue;
+            &:hover{
+                background: transparent;
+                color: white;
+            }
+        }
+        &.secondary{
+            background: transparent;
+            color: white;
+            &:hover{
+                background: white;
+                color: $blue;
+            }
+        }
     }
 </style>

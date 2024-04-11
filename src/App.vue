@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import Button from './components/Button.vue';
+import Modal from './components/Modal.vue';
 import Score from './components/Score.vue'
+import Icon from './components/Icon.vue';
 import { ref } from 'vue'
+
+const isRuleOpen = ref(false)
+
+function toggleRuleModal() {
+  isRuleOpen.value = !isRuleOpen.value
+}
 
 const count = ref(0)
 </script>
@@ -12,6 +21,12 @@ const count = ref(0)
   </header>
 
   <RouterView />
+
+  <Button link="" @click="toggleRuleModal" theme="secondary">Rules</Button>
+  <Modal :isOpen="isRuleOpen" @close="isRuleOpen = false">
+    <img src="@/assets/image-rules.svg">
+  </Modal>
+
 </template>
 
 <style scoped>

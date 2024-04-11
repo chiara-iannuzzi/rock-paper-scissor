@@ -40,7 +40,7 @@
         </div>
         <div>
             <p>{{finalScoreState}}</p>
-            <Button link="/">Play again</Button>
+            <Button theme="primary" link="/">Play again</Button>
         </div>
         
         <div>
