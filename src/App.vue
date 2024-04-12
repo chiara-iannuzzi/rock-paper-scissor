@@ -5,6 +5,7 @@ import Modal from './components/Modal.vue';
 import Score from './components/Score.vue'
 import Icon from './components/Icon.vue';
 import { ref } from 'vue'
+import { store } from './store'
 
 const isRuleOpen = ref(false)
 
@@ -12,12 +13,11 @@ function toggleRuleModal() {
   isRuleOpen.value = !isRuleOpen.value
 }
 
-const count = ref(0)
 </script>
 
 <template>
   <header>
-    <Score :score="count"></Score>
+    <Score :score="store.score"></Score>
   </header>
 
   <RouterView />

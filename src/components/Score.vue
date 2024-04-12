@@ -6,7 +6,7 @@
 
 <template>
     <div class="score-container">
-        <h1 class="score-title">Rock<br>Paper<br>Scissor</h1>
+        <h1 class="score-title">Rock<br>Paper<br>Scissor<br>Lizard<br>Spock</h1>
         <div class="score-count-container">
             <p>Score</p>
             <p class="score-count">{{ score }}</p>
@@ -23,7 +23,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 400px;
+            max-width: 500px;
             margin: auto;
             padding: rem(10) rem(20);
         }

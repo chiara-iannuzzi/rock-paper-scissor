@@ -3,6 +3,8 @@
     import Button from './Button.vue';
     import CircleAnimation from './CircleAnimation.vue';
     import { ref } from 'vue'
+    
+    import { store } from '../store';
 
     import { rps } from '../constants';
     import { useRoute } from 'vue-router'
@@ -20,18 +22,30 @@
     case pickedId == randomId + 1 || pickedId == 0 && randomId == 4:
         finalScoreState.value = 'you loose'
         finalScoreWhoWin.value = 0
+        setTimeout(() => {
+          store.score--
+        }, 2000)
         break;
     case pickedId + 1 == randomId || pickedId == 4 && randomId == 0:
         finalScoreState.value = 'you win'
         finalScoreWhoWin.value = 1
+        setTimeout(() => {
+          store.score++
+        }, 2000)
         break;
         case pickedId == 3 && randomId == 0 || pickedId == 4 && randomId == 1 || pickedId == 0 && randomId == 2 || pickedId == 1 && randomId == 3 || pickedId == 2 && randomId == 4 :
         finalScoreState.value = 'you loose'
         finalScoreWhoWin.value = 0
+        setTimeout(() => {
+          store.score--
+        }, 2000)
         break;
     case pickedId == 0 && randomId == 3 || pickedId == 1 && randomId == 4 || pickedId == 2 && randomId == 0 || pickedId == 3 && randomId == 1 || pickedId == 4 && randomId == 2 :
         finalScoreState.value = 'you win'
         finalScoreWhoWin.value = 1
+        setTimeout(() => {
+          store.score++
+        }, 2000)
         break;
     default:
         finalScoreState.value = 'it\'s a tie'
