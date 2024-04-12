@@ -22,13 +22,17 @@ function toggleRuleModal() {
 
   <RouterView />
 
-  <Button link="" @click="toggleRuleModal" theme="secondary">Rules</Button>
+  <Button class="rule-button" link="" @click="toggleRuleModal" theme="secondary">Rules</Button>
   <Modal :isOpen="isRuleOpen" @close="isRuleOpen = false">
     <img src="@/assets/image-rules-bonus.svg">
   </Modal>
 
 </template>
 
-<style scoped>
-
+<style lang="scss">
+  .rule-button{
+    position: fixed;
+    bottom: rem(20);
+    right: rem(20);
+  }
 </style>
