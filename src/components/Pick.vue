@@ -9,7 +9,7 @@
     <RouterLink :to="'/pick/' + index" v-for="(item, index) in rps" :key="item" :class="'pick-icon-' + item + ' color-' + item">
       <Icon :class="'pick-icon-' + item + '-svg'" :name="'icon-' + item"/>
     </RouterLink>
-    <Icon class="pick-container-background" name="bg-pentagon"/>
+    <img class="pick-container-background" src="@/assets/bg-pentagon.svg">
   </section>
   
 
@@ -27,17 +27,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: rem(50);
+    border-radius: rem(100);
     color: $blue;
     &::after{
       content:"";
       position:absolute;
-      width: 80px;
-      height: 80px;
+      width: rem($rpsIconBgWidth);
+      height: rem($rpsIconBgWidth);
       left: 10px;
       top: 10px;
       background: white;
-      border-radius: 40px;
+      border-radius: 100px;
     }
     &-svg{
       z-index: 2;
@@ -54,23 +54,26 @@
     &-container{
       position: relative;
       max-width: fit-content;
-      margin: rem(200) auto 0 auto;
+      margin: rem(150) auto 0 auto;
+      &-background{
+        width: rem(400);
+      }
     }
     &-icon{
       &-paper{
-        @include rpsLinkStyle(80px, unset, calc(($rpsIconWidth / 4) * -1px), unset);
+        @include rpsLinkStyle(90px, unset, calc(($rpsIconWidth / 4) * -1px), unset);
       }
       &-lizard{
-        @include rpsLinkStyle(unset, 0, unset, 0);
+        @include rpsLinkStyle(unset, 0, unset, calc(($rpsIconWidth / 4) * -1px));
       }
       &-spock{
-        @include rpsLinkStyle(80px, calc(($rpsIconWidth / 4) * -1px), unset, unset);
+        @include rpsLinkStyle(90px, calc(($rpsIconWidth / 4) * -1px), unset, unset);
       }
       &-scissors{
-        @include rpsLinkStyle(0, calc(50% - ($rpsIconWidth / 2) * 1px), unset, unset);
+        @include rpsLinkStyle(calc(($rpsIconWidth / 4) * -1px), calc(50% - ($rpsIconWidth / 2) * 1px), unset, unset);
       }
       &-rock{
-        @include rpsLinkStyle(unset, unset, 0, 0);
+        @include rpsLinkStyle(unset, unset, 0, calc(($rpsIconWidth / 4) * -1px));
       }
     }
   }
