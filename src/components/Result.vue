@@ -10,9 +10,9 @@
     import { useRoute } from 'vue-router'
 
     const route = useRoute()
-    const pickedId = parseInt(route.params.id);
+    const pickedId = parseInt(route.params.id[0]);
     const pickedItem = rps[pickedId];
-    const randomId = Math.floor(Math.random() * 3);
+    const randomId = Math.floor(Math.random() * 5);
     const randomPicked = rps[randomId];
 
     const finalScoreState = ref('');
