@@ -51,13 +51,19 @@
         &-content {
             transition: .3s ease;
             transform: translateY(-20px);
-            flex-basis: 600px;
+            width: 100%;
+            height: 100%;
+            max-width: rem(600);
             padding: rem(30);
             background-color: white;
             border-radius: 5px;
             display: flex;
+            align-items: center;
             justify-content: center;
             position: relative;
+            @media screen and (min-width: 1280px) {
+              height: unset;
+            }
         }
         &-close{
           position: absolute;

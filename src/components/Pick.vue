@@ -1,6 +1,37 @@
 <script setup lang="ts">
-  import { rps } from '../constants';
+  import { ref } from 'vue';
+import { rps } from '../constants';
   import Icon from './Icon.vue'
+
+  //State
+  const rpsIconWidthNumber = ref(0)
+  const rpsIconWidth = ref()
+  const rpsIconBgWidthNumber = ref()
+  const rpsIconBgWidth = ref()
+  const rpsIconTop = ref()
+
+  function changeSize(baseSize:number, rpsTop:number){
+    rpsIconWidthNumber.value = baseSize
+    rpsIconWidth.value = `${rpsIconWidthNumber.value}px`
+    rpsIconBgWidthNumber.value = rpsIconWidthNumber.value - 20;
+    rpsIconBgWidth.value = `${rpsIconBgWidthNumber.value}px`
+    rpsIconTop.value = `${rpsTop}px`
+  }
+
+  function changeRpsSize(){
+    if(window.innerWidth < 1280){
+      changeSize(100, 60)
+    }
+    else{
+      changeSize(150, 90)
+    }
+  }
+
+  changeRpsSize()
+
+  window.addEventListener('resize', () => {
+    changeRpsSize()
+  })
 
 </script>
 
@@ -22,8 +53,8 @@
     bottom: $bottom;
     left: $left;
     right: $right;
-    width: rem($rpsIconWidth);
-    height: rem($rpsIconWidth);
+    width: v-bind(rpsIconWidth);
+    height: v-bind(rpsIconWidth);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,8 +63,8 @@
     &::after{
       content:"";
       position:absolute;
-      width: rem($rpsIconBgWidth);
-      height: rem($rpsIconBgWidth);
+      width: v-bind(rpsIconBgWidth);
+      height: v-bind(rpsIconBgWidth);
       left: 10px;
       top: 10px;
       background: white;
@@ -56,24 +87,27 @@
       max-width: fit-content;
       margin: rem(150) auto 0 auto;
       &-background{
-        width: rem(400);
+        width: rem(280);
+        @media screen and (min-width: 1280px) {
+          width: rem(400);
+        }
       }
     }
     &-icon{
       &-paper{
-        @include rpsLinkStyle(90px, unset, calc(($rpsIconWidth / 4) * -1px), unset);
+        @include rpsLinkStyle(v-bind(rpsIconTop), unset, calc((v-bind(rpsIconWidthNumber) / 4) * -1px), unset);
       }
       &-lizard{
-        @include rpsLinkStyle(unset, 0, unset, calc(($rpsIconWidth / 4) * -1px));
+        @include rpsLinkStyle(unset, 0, unset, calc((v-bind(rpsIconWidthNumber) / 4) * -1px));
       }
       &-spock{
-        @include rpsLinkStyle(90px, calc(($rpsIconWidth / 4) * -1px), unset, unset);
+        @include rpsLinkStyle(v-bind(rpsIconTop), calc((v-bind(rpsIconWidthNumber) / 4) * -1px), unset, unset);
       }
       &-scissors{
-        @include rpsLinkStyle(calc(($rpsIconWidth / 4) * -1px), calc(50% - ($rpsIconWidth / 2) * 1px), unset, unset);
+        @include rpsLinkStyle(calc((v-bind(rpsIconWidthNumber) / 4) * -1px), calc(50% - (v-bind(rpsIconWidthNumber) / 2) * 1px), unset, unset);
       }
       &-rock{
-        @include rpsLinkStyle(unset, unset, 0, calc(($rpsIconWidth / 4) * -1px));
+        @include rpsLinkStyle(unset, unset, 0, calc((v-bind(rpsIconWidthNumber) / 4) * -1px));
       }
     }
   }

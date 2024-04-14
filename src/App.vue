@@ -24,15 +24,22 @@ function toggleRuleModal() {
 
   <Button class="rule-button" link="" @click="toggleRuleModal" theme="secondary">Rules</Button>
   <Modal :isOpen="isRuleOpen" @close="isRuleOpen = false">
-    <img src="@/assets/image-rules-bonus.svg">
+    <img class="rule-img" src="@/assets/image-rules-bonus.svg">
   </Modal>
 
 </template>
 
 <style lang="scss">
-  .rule-button{
-    position: fixed;
-    bottom: rem(20);
-    right: rem(20);
+  .rule{
+    &-img{
+      width: auto;
+      height: fit-content;
+      max-width: 100%;
+    }
+    &-button{
+      position: fixed;
+      bottom: rem(20);
+      right: rem(20);
+    }
   }
 </style>

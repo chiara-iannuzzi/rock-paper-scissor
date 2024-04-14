@@ -15,6 +15,12 @@
     const randomId = Math.floor(Math.random() * 5);
     const randomPicked = rps[randomId];
 
+    //State
+    const rpsIconWidthNumber = ref()
+    const rpsIconWidth = ref()
+    const rpsIconBgWidthNumber = ref()
+    const rpsIconBgWidth = ref()
+
     const finalScoreState = ref('');
     const finalScoreWhoWin = ref();
 
@@ -51,8 +57,29 @@
         finalScoreState.value = 'it\'s a tie'
         finalScoreWhoWin.value = null
 
+    }
 
-}
+    function changeSize(baseSize:any){
+      rpsIconWidthNumber.value = baseSize
+      rpsIconWidth.value = `${rpsIconWidthNumber.value}px`
+      rpsIconBgWidthNumber.value = rpsIconWidthNumber.value - 40;
+      rpsIconBgWidth.value = `${rpsIconBgWidthNumber.value}px`
+    }
+
+    function changeRpsSize(){
+      if(window.innerWidth < 1280){
+        changeSize(150)
+      }
+      else{
+        changeSize(200)
+      }
+    }
+
+    changeRpsSize()
+
+    window.addEventListener('resize', () => {
+      changeRpsSize()
+    })
     
 </script>
 
@@ -86,8 +113,8 @@
 <style scoped lang="scss">
   @mixin rpsLinkStyle(){
     position: relative;
-    width: rem(200);
-    height: rem(200);
+    width: v-bind(rpsIconWidth);
+    height: v-bind(rpsIconWidth);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,8 +123,8 @@
     &::after{
       content:"";
       position:absolute;
-      width: 160px;
-      height: 160px;
+      width: v-bind(rpsIconBgWidth);
+      height: v-bind(rpsIconBgWidth);
       left: 20px;
       top: 20px;
       background: white;
@@ -141,11 +168,16 @@
 
   .circle-container{
       position:absolute;
-      bottom: 0;
+      bottom: 25px;
+      left: -25px;
       opacity: 0;
-      width:200px;
-      height:200px;
+      width:v-bind(rpsIconWidth);
+      height:v-bind(rpsIconWidth);
       z-index: -1;
+      @media screen and (min-width: 1280px) {
+        bottom: 0;
+        left: 0;
+      }
       &.is-showing{
           animation: fadeIn .1s 1.5s both;
       }
@@ -158,11 +190,23 @@
       align-items: center;
       margin : 100px auto 0 auto;
       max-width: 500px;
-      animation: containerSpacing .4s 2s ease both;
+      flex-wrap: wrap;
+      @media screen and (min-width: 1280px) {
+        flex-wrap: nowrap;
+        animation: containerSpacing .4s 2s ease both;
+      }
     }
     &-middle{
       animation: fadeIn .6s 2.3s ease both;
       text-align: center;
+      order: 2;
+      width: 100%;
+      margin-top: 50px;
+      @media screen and (min-width: 1280px) {
+        order: unset;
+        width: unset;
+        margin-top: 0;
+      }
       &-title{
         font-size: 30px;
         text-transform: uppercase;
@@ -174,10 +218,13 @@
       position:relative;
       &-title{
         margin-bottom: 20px;
-        font-size: 20px;
+        font-size: 16px;
         text-transform: uppercase;
         font-weight: bold;
         text-align: center;
+        @media screen and (min-width: 1280px) {
+          font-size: 20px;
+        }
       }
     }
   }
@@ -185,8 +232,8 @@
   .house-choice{
     animation: fadeIn .3s 1s both;
     &-placeholder{
-      width: 200px;
-      height: 200px;
+      width: v-bind(rpsIconWidth);
+      height: v-bind(rpsIconWidth);
       background: rgba(0, 0, 0, 0.2);
       border-radius: 100px;
       position: absolute;
