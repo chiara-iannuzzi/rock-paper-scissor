@@ -60,6 +60,7 @@ import { rps } from '../constants';
     justify-content: center;
     border-radius: rem(100);
     color: $blue;
+    box-shadow: inset -1px -4px rgba(0, 0, 125, 0.2);
     &::after{
       content:"";
       position:absolute;
@@ -69,9 +70,21 @@ import { rps } from '../constants';
       top: 10px;
       background: white;
       border-radius: 100px;
+      box-shadow: inset 1px 4px rgba(0, 0, 125, 0.2);
+      transition: .3s ease;
     }
     &-svg{
       z-index: 2;
+      transition: .3s ease;
+    }
+    &:hover{
+      &::after{
+        box-shadow: inset 4px 8px rgba(0, 0, 125, 0.2);
+        transform: scale(0.99);
+      }
+      & .icon{
+        transform: scale(0.90);
+      }
     }
   }
 

@@ -120,6 +120,7 @@
     justify-content: center;
     border-radius: rem(100);
     color: $blue;
+    box-shadow: inset -1px -4px rgba(0, 0, 125, 0.2);
     &::after{
       content:"";
       position:absolute;
@@ -129,6 +130,7 @@
       top: 20px;
       background: white;
       border-radius: 80px;
+      box-shadow: inset 1px 4px rgba(0, 0, 125, 0.2);
     }
     &-svg{
       z-index: 2;
