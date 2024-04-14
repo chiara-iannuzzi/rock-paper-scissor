@@ -53,7 +53,6 @@
             transform: translateY(-20px);
             width: 100%;
             height: 100%;
-            max-width: rem(600);
             padding: rem(30);
             background-color: white;
             border-radius: 5px;
@@ -63,6 +62,7 @@
             position: relative;
             @media screen and (min-width: 1280px) {
               height: unset;
+              max-width: rem(600);
             }
         }
         &-close{
